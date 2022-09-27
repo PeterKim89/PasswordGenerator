@@ -1,6 +1,7 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+
 // Create arrays for various character types
 var lowercaseCharacter = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var uppercaseCharacter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -16,8 +17,7 @@ var chosenParameters = [];
 var passwordLength = 0;
 var parameterIndex = 0;
 var chosenCharacter;
-var generatedPassword;
-
+var generatedPassword = "";
 
 
 // generates a random index between 0 and the number of chosen parameters and returns it
@@ -33,13 +33,28 @@ function characterSelector() {
 }
 
 // looping until we reach the desired password length, calling our parameterSelector() and characterSelector() functions to choose a random character. Then appending said character onto our generated password
-for (i=0; i < passwordLength; i++)
-{ 
-  generatedPassword += characterSelector(parameterSelector());  
+function generatePassword()
+{
+  for (i=0; i < passwordLength; i++)
+  { 
+    //generatedPassword += characterSelector(parameterSelector());  
+    var tempPS = parameterSelector();
+    var tempCS = characterSelector();
+
+    console.log("This is current index: " + i + " This is tempPS: " + tempPS + " and this is tempCS: " + tempCS)
+    generatedPassword = generatedPassword + tempCS;
+    console.log("This is current password: " + generatedPassword);
+  }
+  return generatedPassword;
 }
+// test run
 
+passwordLength = 8;
+chosenParameters = [lowercaseCharacter, uppercaseCharacter, numberCharacter, specialCharacter];
+console.log(generatePassword());
+console.log("*******************")
 
-
+// end test run
 
 
 // Write password to the #password input
