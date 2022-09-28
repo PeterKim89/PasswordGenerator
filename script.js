@@ -8,7 +8,7 @@ var uppercaseCharacter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N
 var numberCharacter = [0,1,2,3,4,5,6,7,8,9];
 // Create a string of special characters, then using the split function to convert the string into an array
 // To avoid confusion creating an array with specific characters that relate to strings and escape characters
-var symbolString =  "~`!@#$%^&*()_-+={[}]|\:;\"'<,>.?/"
+var symbolString =  " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
 var specialCharacter = symbolString.split("");
 
 // wrapper array for user chosen parameters
@@ -35,6 +35,8 @@ function characterSelector() {
 // looping until we reach the desired password length, calling our parameterSelector() and characterSelector() functions to choose a random character. Then appending said character onto our generated password
 function generatePassword()
 {
+  // resets generated password to an empty string every time the function is called so as to not infinitely concatenate passwords
+  generatedPassword = "";
   for (i=0; i < passwordLength; i++)
   { 
     //generatedPassword += characterSelector(parameterSelector());  
@@ -47,14 +49,27 @@ function generatePassword()
   }
   return generatedPassword;
 }
-// test run
 
+// test run
 passwordLength = 8;
 chosenParameters = [lowercaseCharacter, uppercaseCharacter, numberCharacter, specialCharacter];
 console.log(generatePassword());
 console.log("*******************")
-
 // end test run
+
+// Function requires a return statement to not instantly activate upon page load
+// function myTestFunction()
+// {
+//   alert("Test");
+//   return;
+// }
+
+function userInputPrompts()
+{
+  passwordLength = prompt("How many characters would you like your password to have?\nEnter a number between 8 and 128.");
+  return;
+}
+
 
 
 // Write password to the #password input
@@ -63,8 +78,10 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
+
+//generateBtn.addEventListener("click", myTestFunction);
+generateBtn.addEventListener("click", userInputPrompts);
 generateBtn.addEventListener("click", writePassword);
