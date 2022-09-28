@@ -9,21 +9,25 @@ var numberCharacter = [0,1,2,3,4,5,6,7,8,9];
 // Create a string of special characters, then using the split function to convert the string into an array
 // To avoid confusion creating an array with specific characters that relate to strings and escape characters
 var specialString =  " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+// convert the string into an array using split
 var specialCharacter = specialString.split("");
-
 // wrapper array for user chosen parameters
 var chosenParameters = [];
 // user input: password length
 var passwordLength = 0;
+// used to randomly pick between chosen character types
 var parameterIndex = 0;
+
 var chosenCharacter;
 var generatedPassword = "";
 
+// given input array, push it onto the chosenParameters array
 function chosenParameterPush(array) {
   chosenParameters.push(array);
   return chosenParameters;
 }
 
+// prompt if lowercase characters are wanted
 function lowercaseConfirm()
 {
   if (confirm("Click OK to confirm lowercase characters") == true)
@@ -37,6 +41,7 @@ function lowercaseConfirm()
   }
 }
 
+// prompt if uppercase characters are wanted
 function uppercaseConfirm()
 {
   if (confirm("Click OK to confirm uppercase characters") == true)
@@ -50,6 +55,7 @@ function uppercaseConfirm()
   }
 }
 
+// prompt if numerical characters are wanted
 function numberConfirm()
 {
   if (confirm("Click OK to confirm numerical characters") == true)
@@ -63,6 +69,7 @@ function numberConfirm()
   }
 }
 
+// prompt if sepcial characters are wanted
 function specialConfirm()
 {
   if (confirm("Click OK to confirm special character") == true)
@@ -82,7 +89,7 @@ function parameterSelector() {
   return parameterIndex;
 }
 // generates a random character from the selected parameter array and returns it
-function characterSelector() {
+function characterSelector(i) {
   var secondaryIndex = Math.floor(Math.random()*(chosenParameters[parameterIndex].length))
   chosenCharacter = chosenParameters[parameterIndex][secondaryIndex];
   return chosenCharacter;
@@ -93,24 +100,25 @@ function generatePassword()
 {
   // resets generated password to an empty string every time the function is called so as to not infinitely concatenate passwords
   generatedPassword = "";
+  // iterate the given password length, 1 character at a time
   for (i=0; i < passwordLength; i++)
   { 
     //generatedPassword += characterSelector(parameterSelector());  
-    var tempPS = parameterSelector();
-    var tempCS = characterSelector();
+    //parameterSelector();
+    //var tempCS = characterSelector();
 
-    console.log("This is current index: " + i + " This is tempPS: " + tempPS + " and this is tempCS: " + tempCS)
-    generatedPassword = generatedPassword + tempCS;
-    console.log("This is current password: " + generatedPassword);
+    //console.log("This is current index: " + i + " This is tempPS: " + tempPS + " and this is tempCS: " + tempCS)
+    generatedPassword = generatedPassword + characterSelector(parameterSelector());
+    //console.log("This is current password: " + generatedPassword);
   }
   return generatedPassword;
 }
 
 // test run
-passwordLength = 8;
-chosenParameters = [lowercaseCharacter, uppercaseCharacter, numberCharacter, specialCharacter];
-console.log(generatePassword());
-console.log("*******************")
+// passwordLength = 8;
+// chosenParameters = [lowercaseCharacter, uppercaseCharacter, numberCharacter, specialCharacter];
+// console.log(generatePassword());
+// console.log("*******************")
 // end test run
 
 // Function requires a return statement to not instantly activate upon page load
