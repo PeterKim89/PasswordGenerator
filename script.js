@@ -24,6 +24,58 @@ function chosenParameterPush(array) {
   return chosenParameters;
 }
 
+function lowercaseConfirm()
+{
+  if (confirm("Click OK to confirm lowercase characters") == true)
+  {  
+    chosenParameterPush(lowercaseCharacter);
+    return chosenParameters;
+  }
+  else
+  {
+    return chosenParameters;
+  }
+}
+
+function uppercaseConfirm()
+{
+  if (confirm("Click OK to confirm uppercase characters") == true)
+  {
+    chosenParameterPush(uppercaseCharacter);
+    return chosenParameters;
+  }
+  else
+  {
+    return chosenParameters;
+  }
+}
+
+function numberConfirm()
+{
+  if (confirm("Click OK to confirm numerical characters") == true)
+  {
+    chosenParameterPush(numberCharacter);
+    return chosenParameters;
+  }
+  else
+  {
+    return chosenParameters;
+  }
+}
+
+function specialConfirm()
+{
+  if (confirm("Click OK to confirm special character") == true)
+  {  
+    chosenParameterPush(specialCharacter)
+    return chosenParameters;
+  }
+  else
+  {
+    return chosenParameters;
+  }
+}
+
 // generates a random index between 0 and the number of chosen parameters and returns it
 function parameterSelector() {
   parameterIndex = Math.floor(Math.random()*(chosenParameters.length));
@@ -70,29 +122,19 @@ console.log("*******************")
 
 function userInputPrompts()
 {
+  // reset the array upon activation
+  chosenParameters=[];
   // Initial prompt asking for password length which will be stored globally
   passwordLength = prompt("How many characters would you like your password to have?\nEnter a number between 8 and 128.");
   if (passwordLength >= 8 && passwordLength <= 128)
   {
-    if (confirm("Click OK to confirm lowercase characters") == true)
-    {
-      chosenParameterPush(lowercaseCharacter);
-      if (confirm("Click OK to confirm uppercase characters") == true)
-      {
-        chosenParameterPush(uppercaseCharacter);
-        if (confirm("Click OK to confirm numerical characters") == true)
-        {
-          chosenParameterPush(numberCharacter);
-          if (confirm("Click OK to confirm special character") == true)
-          chosenParameterPush(specialCharacter)
-          return chosenParameters;
-        }
-      }
-    }
-    else
-    {
-      
-    }
+    lowercaseConfirm();
+    uppercaseConfirm();
+    numberConfirm();
+    specialConfirm();
+    console.log("This is the prompt debug");
+    console.log(chosenParameters);
+    console.log("This is the prompt debug");
   }
 
   // Exception for when password length does not meet the requirement
@@ -127,3 +169,27 @@ function writePassword() {
 //generateBtn.addEventListener("click", myTestFunction);
 generateBtn.addEventListener("click", userInputPrompts);
 generateBtn.addEventListener("click", writePassword);
+
+
+
+
+// if (confirm("Click OK to confirm lowercase characters") == true)
+//     {
+//       chosenParameterPush(lowercaseCharacter);
+//       if (confirm("Click OK to confirm uppercase characters") == true)
+//       {
+//         chosenParameterPush(uppercaseCharacter);
+//         if (confirm("Click OK to confirm numerical characters") == true)
+//         {
+//           chosenParameterPush(numberCharacter);
+//           if (confirm("Click OK to confirm special character") == true)
+//           chosenParameterPush(specialCharacter)
+//           return chosenParameters;
+//         }
+//       }
+//     }
+//     else
+//     {
+      
+//     }
+//   }
