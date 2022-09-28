@@ -132,9 +132,19 @@ function userInputPrompts()
     uppercaseConfirm();
     numberConfirm();
     specialConfirm();
-    console.log("This is the prompt debug");
-    console.log(chosenParameters);
-    console.log("This is the prompt debug");
+    // console.log("This is the prompt debug");
+    // console.log(chosenParameters);
+    // console.log("This is the prompt debug");
+    
+    // Exception if all prompts are canceled
+    if (chosenParameters.length == 0)
+    {
+      alert("Select at least 1 type of character to include.");
+    }
+    else
+    {
+      return chosenParameters;
+    }
   }
 
   // Exception for when password length does not meet the requirement
