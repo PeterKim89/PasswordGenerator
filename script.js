@@ -8,8 +8,8 @@ var uppercaseCharacter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N
 var numberCharacter = [0,1,2,3,4,5,6,7,8,9];
 // Create a string of special characters, then using the split function to convert the string into an array
 // To avoid confusion creating an array with specific characters that relate to strings and escape characters
-var symbolString =  " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
-var specialCharacter = symbolString.split("");
+var specialString =  " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+var specialCharacter = specialString.split("");
 
 // wrapper array for user chosen parameters
 var chosenParameters = [];
@@ -19,6 +19,10 @@ var parameterIndex = 0;
 var chosenCharacter;
 var generatedPassword = "";
 
+function chosenParameterPush(array) {
+  chosenParameters.push(array);
+  return chosenParameters;
+}
 
 // generates a random index between 0 and the number of chosen parameters and returns it
 function parameterSelector() {
@@ -72,11 +76,22 @@ function userInputPrompts()
   {
     if (confirm("Click OK to confirm lowercase characters") == true)
     {
-      alert("Yes this works");
+      chosenParameterPush(lowercaseCharacter);
+      if (confirm("Click OK to confirm uppercase characters") == true)
+      {
+        chosenParameterPush(uppercaseCharacter);
+        if (confirm("Click OK to confirm numerical characters") == true)
+        {
+          chosenParameterPush(numberCharacter);
+          if (confirm("Click OK to confirm special character") == true)
+          chosenParameterPush(specialCharacter)
+          return chosenParameters;
+        }
+      }
     }
     else
     {
-      alert("Boo you suck");
+      
     }
   }
 
