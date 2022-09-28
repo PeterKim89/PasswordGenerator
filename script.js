@@ -67,6 +67,22 @@ console.log("*******************")
 function userInputPrompts()
 {
   passwordLength = prompt("How many characters would you like your password to have?\nEnter a number between 8 and 128.");
+  if (passwordLength >= 8 && passwordLength <= 128)
+  {
+
+  }
+
+  else 
+  {
+    if (passwordLength < 8)
+    {
+      alert("Password length should be at least 8 characters long.");
+    }
+    else
+    {
+      alert("Password length should be less than 128 characters long.");
+    }
+  }
   return;
 }
 
