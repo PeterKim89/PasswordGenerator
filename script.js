@@ -86,22 +86,9 @@ function parameterSelector() {
 
 // generates a random character from the selected parameter array and returns it
 function characterSelector(i) {
-  var secondaryIndex = Math.floor(Math.random()*(chosenParameters[parameterIndex].length))
+  var secondaryIndex = Math.floor(Math.random()*chosenParameters[parameterIndex].length)
   var chosenCharacter = chosenParameters[parameterIndex][secondaryIndex];
   return chosenCharacter;
-}
-
-// looping until we reach the desired password length, calling our parameterSelector() and characterSelector() functions to choose a random character. Then appending said character onto our generated password
-function generatePassword()
-{
-  // resets generated password to an empty string every time the function is called so as to not infinitely concatenate passwords
-  generatedPassword = "";
-  // iterate the given password length, 1 character at a time
-  for (i=0; i < passwordLength; i++)
-  { 
-    generatedPassword = generatedPassword + characterSelector(parameterSelector());
-  }
-  return generatedPassword;
 }
 
 function userInputPrompts()
@@ -112,6 +99,7 @@ function userInputPrompts()
   passwordLength = prompt("How many characters would you like your password to have?\nEnter a number between 8 and 128.");
   if (passwordLength >= 8 && passwordLength <= 128)
   {
+    console.log(typeof(passwordLength));
     lowercaseConfirm();
     uppercaseConfirm();
     numberConfirm();
@@ -130,30 +118,33 @@ function userInputPrompts()
   // Exception for when password length does not meet the requirement
   else 
   {
-    // requires 
-    if (typeof(passwordLength) != "number")
-    {
+    // requires an integer input between 8 and 128
       alert("Please input a number between 8 and 128 characters.");
-    }
-    // if less than 8 characters long
-    else if (passwordLength < 8)
-    {
-      alert("Password length should be at least 8 characters long.");
-    }
-    // if more than 128 characters long
-    else
-    {
-      alert("Password length should be less than 128 characters long.");
-    }
   }
-  return;
+}
+
+// looping until we reach the desired password length, calling our parameterSelector() and characterSelector() functions to choose a random character. Then appending said character onto our generated password
+function generatePassword()
+{ 
+  // resets generated password to an empty string every time the function is called so as to not infinitely concatenate passwords
+  var generatedPassword = "";
+  // iterate the given password length, 1 character at a time
+  for (i=0; i < passwordLength; i++)
+  { 
+    generatedPassword = generatedPassword + characterSelector(parameterSelector());
+  }
+  return generatedPassword;
 }
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
+  // confirms if passwordLength is a valid input, else outputs nothing
+  if (passwordLength >= 8 && passwordLength <= 128)
+  {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
 }
 
 // Add event listener to generate button
