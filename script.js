@@ -1,7 +1,6 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-
 // Create arrays for various character types
 var lowercaseCharacter = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 var uppercaseCharacter = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
@@ -17,10 +16,6 @@ var chosenParameters = [];
 var passwordLength = 0;
 // used to randomly pick between chosen character types
 var parameterIndex = 0;
-
-var chosenCharacter;
-var generatedPassword = "";
-
 // given input array, push it onto the chosenParameters array
 function chosenParameterPush(array) {
   chosenParameters.push(array);
@@ -88,10 +83,11 @@ function parameterSelector() {
   parameterIndex = Math.floor(Math.random()*(chosenParameters.length));
   return parameterIndex;
 }
+
 // generates a random character from the selected parameter array and returns it
 function characterSelector(i) {
   var secondaryIndex = Math.floor(Math.random()*(chosenParameters[parameterIndex].length))
-  chosenCharacter = chosenParameters[parameterIndex][secondaryIndex];
+  var chosenCharacter = chosenParameters[parameterIndex][secondaryIndex];
   return chosenCharacter;
 }
 
@@ -103,30 +99,10 @@ function generatePassword()
   // iterate the given password length, 1 character at a time
   for (i=0; i < passwordLength; i++)
   { 
-    //generatedPassword += characterSelector(parameterSelector());  
-    //parameterSelector();
-    //var tempCS = characterSelector();
-
-    //console.log("This is current index: " + i + " This is tempPS: " + tempPS + " and this is tempCS: " + tempCS)
     generatedPassword = generatedPassword + characterSelector(parameterSelector());
-    //console.log("This is current password: " + generatedPassword);
   }
   return generatedPassword;
 }
-
-// test run
-// passwordLength = 8;
-// chosenParameters = [lowercaseCharacter, uppercaseCharacter, numberCharacter, specialCharacter];
-// console.log(generatePassword());
-// console.log("*******************")
-// end test run
-
-// Function requires a return statement to not instantly activate upon page load
-// function myTestFunction()
-// {
-//   alert("Test");
-//   return;
-// }
 
 function userInputPrompts()
 {
@@ -140,10 +116,6 @@ function userInputPrompts()
     uppercaseConfirm();
     numberConfirm();
     specialConfirm();
-    // console.log("This is the prompt debug");
-    // console.log(chosenParameters);
-    // console.log("This is the prompt debug");
-    
     // Exception if all prompts are canceled
     if (chosenParameters.length == 0)
     {
@@ -158,8 +130,13 @@ function userInputPrompts()
   // Exception for when password length does not meet the requirement
   else 
   {
+    // requires 
+    if (typeof(passwordLength) != "number")
+    {
+      alert("Please input a number between 8 and 128 characters.");
+    }
     // if less than 8 characters long
-    if (passwordLength < 8)
+    else if (passwordLength < 8)
     {
       alert("Password length should be at least 8 characters long.");
     }
@@ -172,42 +149,13 @@ function userInputPrompts()
   return;
 }
 
-
-
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-
   passwordText.value = password;
 }
 
 // Add event listener to generate button
-
-//generateBtn.addEventListener("click", myTestFunction);
 generateBtn.addEventListener("click", userInputPrompts);
 generateBtn.addEventListener("click", writePassword);
-
-
-
-
-// if (confirm("Click OK to confirm lowercase characters") == true)
-//     {
-//       chosenParameterPush(lowercaseCharacter);
-//       if (confirm("Click OK to confirm uppercase characters") == true)
-//       {
-//         chosenParameterPush(uppercaseCharacter);
-//         if (confirm("Click OK to confirm numerical characters") == true)
-//         {
-//           chosenParameterPush(numberCharacter);
-//           if (confirm("Click OK to confirm special character") == true)
-//           chosenParameterPush(specialCharacter)
-//           return chosenParameters;
-//         }
-//       }
-//     }
-//     else
-//     {
-      
-//     }
-//   }
