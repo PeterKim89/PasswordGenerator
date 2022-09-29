@@ -1,5 +1,5 @@
 # PasswordGenerator
-![JavaScript]https://img.shields.io/github/languages/top/PeterKim89/PasswordGenerator
+![JavaScript](https://img.shields.io/github/languages/top/PeterKim89/PasswordGenerator)
 
 ## Introduction
 This password generator takes user input on how long they would like their password to be.
@@ -37,8 +37,8 @@ function characterSelector(i) {
 ```
 
 ## Usage 
-[Deployment](https://peterkim89.github.io/PasswordGenerator/)
-[Gif](./Content/giphy.gif)
+![Deployment](https://peterkim89.github.io/PasswordGenerator/) <br>
+![Gif](./Content/giphy.gif)<br>
 Upon clicking the generate button, the user will be prompted to enter their desired password length.
 If the input is an appropriate length, the user will then be prompted to choose whether or not they want to include special characters, numbers, lowercase and uppercase english letters. If the password length is not an appropriate value, an alert will appear and exit out to the DOM. If the password length is appropriate though, a randomly generated password will appear within the box.
 
